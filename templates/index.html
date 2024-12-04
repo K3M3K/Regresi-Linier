@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regresi Linier</title>
+</head>
+<body>
+    <h1>Form Input Data untuk Regresi Linier</h1>
+    <form action="/calculate" method="POST">
+        <label for="x_values">Masukkan Nilai x (pisahkan dengan koma):</label><br>
+        <input type="text" id="x_values" name="x_values" required><br><br>
+        
+        <label for="y_values">Masukkan Nilai y (pisahkan dengan koma):</label><br>
+        <input type="text" id="y_values" name="y_values" required><br><br>
+        
+        <button type="submit">Hitung Regresi</button>
+    </form>
+
+    {% if b0 is not none %}
+    <h2>Hasil Regresi Linier</h2>
+    <p>Garis Regresi: y = {{ b0 }} + {{ b1 }}x</p>
+    <p>Koefisien Determinasi (R²): {{ r2 }}</p>
+    {% endif %}
+
+    {% if plot_url %}
+    <h3>Grafik Regresi Linier</h3>
+    <img src="{{ plot_url }}" alt="Regresi Plot">
+    {% endif %}
+
+    {% if error %}
+    <h3 style="color: red;">{{ error }}</h3>
+    {% endif %}
+</body>
+</html>
