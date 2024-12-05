@@ -109,7 +109,6 @@ Kami menyambut kontribusi dari komunitas. Jika Anda memiliki ide baru atau menem
 
 ## 📄 Lisensi  
 Proyek ini dilisensikan di bawah [MIT License](LICENSE).  
-code by : Maulana Sidik - UHAMKA
 --- 
 
 **Happy Coding! 😊**
