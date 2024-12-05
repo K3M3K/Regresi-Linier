@@ -1,15 +1,24 @@
+import os
 from flask import Flask, render_template, request, jsonify
 import numpy as np
 import mysql.connector
 import matplotlib
 import matplotlib.pyplot as plt
-import os
 
 # Menggunakan backend non-GUI untuk Matplotlib
 matplotlib.use('Agg')
 
-# Tentukan folder static
-app = Flask(__name__, static_folder='C:/Users/Administrator/Documents/TUGAS BESAR METODE NUMERIK/project/static')
+# Tentukan folder static dan templates dengan path absolut
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # Folder tempat main.py berada
+STATIC_FOLDER = os.path.join(BASE_DIR, '..', 'project', 'static')  # Path ke folder static
+TEMPLATES_FOLDER = 'C:/Users/Administrator/Documents/TUGAS BESAR METODE NUMERIK/templates'  # Path ke folder templates yang sudah disebutkan
+
+# Debugging: print folder yang digunakan untuk memastikan benar
+print("Static Folder:", STATIC_FOLDER)
+print("Templates Folder:", TEMPLATES_FOLDER)
+
+# Inisialisasi Flask dengan folder static dan template yang benar
+app = Flask(__name__, static_folder=STATIC_FOLDER, template_folder=TEMPLATES_FOLDER)
 
 # Koneksi ke database MySQL
 db = mysql.connector.connect(
@@ -31,7 +40,7 @@ def regresi_linier(x, y):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html')  # Flask akan mencari index.html di folder templates yang sudah benar
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
@@ -51,9 +60,8 @@ def calculate():
         b0, b1, r2, y_pred = regresi_linier(x, y)
 
         # Pastikan folder 'static' ada
-        static_folder = 'C:/Users/Administrator/Documents/TUGAS BESAR METODE NUMERIK/project/static'
-        if not os.path.exists(static_folder):
-            os.makedirs(static_folder)
+        if not os.path.exists(STATIC_FOLDER):
+            os.makedirs(STATIC_FOLDER)
 
         # Plot hasil regresi
         plt.figure()
@@ -66,7 +74,7 @@ def calculate():
         plt.grid()
 
         # Menyimpan plot ke file di folder static
-        plot_path = os.path.join(static_folder, 'regresi_plot.png')
+        plot_path = os.path.join(STATIC_FOLDER, 'regresi_plot.png')
         plt.savefig(plot_path)
         plt.close()
 

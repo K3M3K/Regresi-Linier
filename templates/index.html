@@ -4,32 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regresi Linier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Mengubah height menjadi min-height */
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 600px; /* Memastikan konten tidak terlalu lebar */
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 30px;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .result h2 {
+            color: #333;
+            font-size: 20px;
+        }
+
+        .result p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .error {
+            color: red;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            label {
+                font-size: 14px;
+            }
+
+            input[type="text"], button {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 22px;
+            }
+
+            input[type="text"], button {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .result {
+                padding: 12px;
+            }
+
+            img {
+                max-width: 100%;
+                margin: 20px 0;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Form Input Data untuk Regresi Linier</h1>
-    <form action="/calculate" method="POST">
-        <label for="x_values">Masukkan Nilai x (pisahkan dengan koma):</label><br>
-        <input type="text" id="x_values" name="x_values" required><br><br>
-        
-        <label for="y_values">Masukkan Nilai y (pisahkan dengan koma):</label><br>
-        <input type="text" id="y_values" name="y_values" required><br><br>
-        
-        <button type="submit">Hitung Regresi</button>
-    </form>
+    <div class="container">
+        <h1>Regresi Linier</h1>
+        <form action="/calculate" method="POST">
+            <label for="x_values">Masukkan Nilai x (pisahkan dengan koma):</label>
+            <input type="text" id="x_values" name="x_values" required>
+            
+            <label for="y_values">Masukkan Nilai y (pisahkan dengan koma):</label>
+            <input type="text" id="y_values" name="y_values" required>
+            
+            <button type="submit">Hitung Regresi</button>
+        </form>
 
-    {% if b0 is not none %}
-    <h2>Hasil Regresi Linier</h2>
-    <p>Garis Regresi: y = {{ b0 }} + {{ b1 }}x</p>
-    <p>Koefisien Determinasi (R²): {{ r2 }}</p>
-    {% endif %}
+        {% if b0 is not none %}
+        <div class="result">
+            <h2>Hasil Regresi Linier</h2>
+            <p>Garis Regresi: y = {{ b0 }} + {{ b1 }}x</p>
+            <p>Koefisien Determinasi (R²): {{ r2 }}</p>
+        </div>
+        {% endif %}
 
-    {% if plot_url %}
-    <h3>Grafik Regresi Linier</h3>
-    <img src="{{ plot_url }}" alt="Regresi Plot">
-    {% endif %}
+        {% if plot_url %}
+        <h3>Grafik Regresi Linier</h3>
+        <img src="{{ plot_url }}" alt="Regresi Plot">
+        {% endif %}
 
-    {% if error %}
-    <h3 style="color: red;">{{ error }}</h3>
-    {% endif %}
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>
