@@ -1,114 +1,93 @@
 
-# 🚀 Regresi Linier Web App  
-**Aplikasi web untuk menghitung regresi linier dengan visualisasi interaktif.**  
-Aplikasi ini dibangun menggunakan Python, Flask, dan MySQL untuk mempermudah analisis data regresi linier melalui antarmuka web yang ramah pengguna.
+# Aplikasi Web Regresi Linier
+
+Aplikasi ini adalah web sederhana untuk melakukan analisis regresi linier. Pengguna dapat memasukkan nilai `x` dan `y`, dan aplikasi akan menghitung garis regresi linier serta menampilkan koefisien determinasi (R²). Selain itu, grafik regresi linier juga ditampilkan untuk memvisualisasikan data.
 
 ---
 
-## 📝 Fitur  
-- **Input Data:** Masukkan nilai `x` dan `y` dengan format yang mudah (dipisahkan koma).  
-- **Perhitungan Regresi Linier:**  
-  - Menampilkan garis regresi dalam format \( y = b_0 + b_1x \).  
-  - Menghitung koefisien determinasi (R²).  
-- **Visualisasi Data:**  
-  - Menampilkan grafik regresi linier (scatter plot dengan garis regresi).  
-- **Antarmuka Modern:** Desain responsif dan estetis menggunakan HTML & CSS.
+## Fitur Utama
+
+1. Input nilai `x` dan `y` yang dipisahkan dengan koma.
+2. Perhitungan garis regresi linier.
+3. Penentuan koefisien determinasi (R²).
+4. Visualisasi grafik regresi linier.
 
 ---
 
-## 📂 Struktur Proyek  
-```
-📦 Regresi-Linier-Web-App
- ┣ 📂 project
- ┃ ┗ 📂 static           # Folder untuk menyimpan grafik hasil regresi
- ┣ 📂 templates          # Folder untuk file HTML
- ┃ ┗ 📜 index.html       # Antarmuka web utama
- ┣ 📜 app.py             # File Python utama
- ┣ 📜 requirements.txt   # Daftar dependensi Python
-```
+## Demo Aplikasi
+
+### Form Input
+Pada bagian ini, pengguna diminta untuk memasukkan nilai `x` dan `y` yang dipisahkan dengan koma. Contoh tampilan form:
+
+![Demo Input](assets/input_demo.png)
+
+### Hasil Perhitungan
+Setelah menghitung regresi linier, aplikasi akan menampilkan hasil garis regresi, nilai koefisien determinasi, dan grafik visualisasi. Berikut adalah contohnya:
+
+**Hasil Regresi Linier:**
+- Garis Regresi: `y = -84.0 + 30.333333333333332x`
+- Koefisien Determinasi (R²): `1.0`
+
+**Visualisasi Grafik:**
+![Demo Output](assets/output_demo.png)
 
 ---
 
-## 🛠️ Instalasi  
-### 1. Clone Repository  
-```bash
-git clone https://github.com/<username>/<repository>.git
-cd <repository>
-```
+## Teknologi yang Digunakan
 
-### 2. Buat Virtual Environment  
-```bash
-python -m venv venv
-source venv/bin/activate  # Untuk Linux/Mac
-venv\Scripts\activate     # Untuk Windows
-```
-
-### 3. Instal Dependensi  
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Konfigurasi Database  
-- Pastikan Anda memiliki MySQL dan XAMPP terinstal.  
-- Buat database bernama **`metnum`** di MySQL.  
-- Sesuaikan username, password, dan nama database di kode Python jika diperlukan:
-  ```python
-  db = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      password="",
-      database="metnum"
-  )
-  ```
-
-### 5. Jalankan Aplikasi  
-```bash
-python app.py
-```
-
-Akses aplikasi di browser: [http://localhost:5000](http://localhost:5000)
+- **Frontend**: HTML, CSS, JavaScript.
+- **Backend**: Python (Flask).
+- **Library**: Matplotlib untuk grafik, NumPy untuk perhitungan.
 
 ---
 
-## 📦 Dependensi  
-Daftar pustaka yang digunakan:
-- **Flask**: Framework web Python.  
-- **MySQL Connector**: Menghubungkan aplikasi dengan database MySQL.  
-- **NumPy**: Perhitungan numerik untuk regresi linier.  
-- **Matplotlib**: Membuat visualisasi hasil regresi.
+## Cara Menjalankan Aplikasi
 
-Instal semua pustaka menggunakan file `requirements.txt`:
-```bash
-pip install -r requirements.txt
-```
+1. Clone repository ini:
+   ```bash
+   git clone https://github.com/username/repository-name.git
+   ```
+2. Masuk ke direktori proyek:
+   ```bash
+   cd repository-name
+   ```
+3. Install dependencies menggunakan pip:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Jalankan server Flask:
+   ```bash
+   python app.py
+   ```
+5. Buka browser dan akses aplikasi di `http://127.0.0.1:5000`.
 
-Isi file `requirements.txt`:
+---
+
+## Struktur Proyek
+
 ```
-Flask==2.3.3
-mysql-connector-python==8.0.32
-numpy==1.25.1
-matplotlib==3.8.1
+📦repository-name
+ ┣ 📂static
+ ┃ ┣ 📂css
+ ┃ ┗ 📂js
+ ┣ 📂templates
+ ┃ ┗ index.html
+ ┣ 📂assets
+ ┃ ┣ input_demo.png
+ ┃ ┗ output_demo.png
+ ┣ app.py
+ ┣ requirements.txt
+ ┗ README.md
 ```
 
 ---
 
-## 📊 Demo  
-### **Masukkan Data**  
-![Input Form](https://via.placeholder.com/800x400?text=Form+Input+Data)  
+## Kontribusi
 
-### **Hasil Regresi Linier**  
-![Regression Output](https://via.placeholder.com/800x400?text=Grafik+Regresi+Linier)  
+Jika Anda ingin berkontribusi pada proyek ini, silakan fork repository ini dan buat pull request. Setiap masukan dan kontribusi sangat dihargai!
 
 ---
 
-## 🧑‍💻 Kontribusi  
-Kami menyambut kontribusi dari komunitas. Jika Anda memiliki ide baru atau menemukan bug, silakan buat **Pull Request** atau ajukan **Issue**.
+## Lisensi
 
----
-
-## 📄 Lisensi  
-Proyek ini dilisensikan di bawah [MIT License](LICENSE).  
-
---- 
-
-**Happy Coding! 😊**
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
