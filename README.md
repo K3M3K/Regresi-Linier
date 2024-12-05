@@ -64,7 +64,7 @@ pip install -r requirements.txt
 
 ### 5. Jalankan Aplikasi  
 ```bash
-python app.py
+python main.py
 ```
 
 Akses aplikasi di browser: [http://localhost:5000](http://localhost:5000)
