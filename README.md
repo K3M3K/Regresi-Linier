@@ -34,6 +34,7 @@ Aplikasi ini dibangun menggunakan Python, Flask, dan MySQL untuk mempermudah ana
 ```bash
 git clone https://github.com/K3M3K/Regresi-Linier.git
 cd Regresi-Linier
+cd Pyhton
 ```
 
 ### 2. Buat Virtual Environment  
