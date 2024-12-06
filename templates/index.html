@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* Mengubah height menjadi min-height */
+            min-height: 100vh;
             flex-direction: column;
         }
 
@@ -22,8 +23,8 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 30px;
-            width: 100%;
-            max-width: 600px; /* Memastikan konten tidak terlalu lebar */
+            width: 90%;
+            max-width: 600px;
             text-align: center;
             box-sizing: border-box;
         }
@@ -39,19 +40,21 @@
         }
 
         label {
-            font-size: 16px;
+            font-size: 14px;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-align: left;
         }
 
         input[type="text"] {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
+            height: 30px;
+            padding: 2px;
+            margin-bottom: 15px;
             border-radius: 5px;
             border: 1px solid #ddd;
-            font-size: 16px;
+            font-size: 14px;
+            text-align: left;
         }
 
         button {
@@ -114,8 +117,9 @@
                 font-size: 14px;
             }
 
-            input[type="text"], button {
-                font-size: 14px;
+            input[type="text"],
+            button {
+                font-size: 12px;
             }
 
             button {
@@ -125,58 +129,156 @@
 
         @media (max-width: 480px) {
             .container {
-                padding: 15px;
+                padding: 12px;
+                max-width: 90%;
             }
 
             h1 {
-                font-size: 22px;
+                font-size: 20px;
             }
 
-            input[type="text"], button {
+            input[type="text"] {
+                font-size: 12px;
+                padding: 3px;
+                height: 20px;
+            }
+
+            label {
                 font-size: 14px;
-                padding: 10px;
             }
 
             .result {
-                padding: 12px;
+                padding: 10px;
             }
 
             img {
                 max-width: 100%;
-                margin: 20px 0;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .container {
+                padding: 12px;
+                max-width: 85%;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            input[type="text"] {
+                font-size: 12px;
+                padding: 1px;
+                height: 20px;
+            }
+
+            .result {
+                padding: 10px;
+            }
+
+            button {
+                padding: 8px;
+                border-radius: 25px;
+                font-size: 10px;
+            }
+
+            label {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 10px;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            input[type="text"] {
+                font-size: 12px;
+                padding: 1px;
+            }
+
+            .result {
+                padding: 4px;
+            }
+
+            label {
+                font-size: 12px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Regresi Linier</h1>
-        <form action="/calculate" method="POST">
+        <form action="/calculate" method="POST" id="regresiForm">
             <label for="x_values">Masukkan Nilai x (pisahkan dengan koma):</label>
-            <input type="text" id="x_values" name="x_values" required>
-            
+            <input type="text" id="x_values" name="x_values" required placeholder="Contoh: 1,2,3,4">
+
             <label for="y_values">Masukkan Nilai y (pisahkan dengan koma):</label>
-            <input type="text" id="y_values" name="y_values" required>
-            
+            <input type="text" id="y_values" name="y_values" required placeholder="Contoh: 2,4,6,8">
+
             <button type="submit">Hitung Regresi</button>
         </form>
 
         {% if b0 is not none %}
         <div class="result">
             <h2>Hasil Regresi Linier</h2>
-            <p>Garis Regresi: y = {{ b0 }} + {{ b1 }}x</p>
-            <p>Koefisien Determinasi (R²): {{ r2 }}</p>
+            <p><b>Persamaan Garis Regresi:</b> y = {{ b0 }} + {{ b1 }}x</p>
+            <p><b>Koefisien Determinasi (R²):</b> {{ r2 }}</p>
+            <p><b>MSE:</b> {{ mse }}</p>
+            <p><b>RMSE:</b> {{ rmse }}</p>
+        </div>
+
+        {% if stats %}
+        <div class="result">
+            <h2>Statistik Deskriptif</h2>
+            <p><b>Rata-rata x:</b> {{ stats.x_mean }}</p>
+            <p><b>Rata-rata y:</b> {{ stats.y_mean }}</p>
+            <p><b>Median x:</b> {{ stats.x_median }}</p>
+            <p><b>Median y:</b> {{ stats.y_median }}</p>
+            <p><b>Standar Deviasi x:</b> {{ stats.x_std }}</p>
+            <p><b>Standar Deviasi y:</b> {{ stats.y_std }}</p>
         </div>
         {% endif %}
 
-        {% if plot_url %}
-        <h3>Grafik Regresi Linier</h3>
-        <img src="{{ plot_url }}" alt="Regresi Plot">
+        <div class="result">
+            <h2>Grafik Regresi Linier</h2>
+            <img src="{{ regresi_plot_url }}" alt="Regresi Plot">
+        </div>
+
+        <div class="result">
+            <h2>Grafik Residuals</h2>
+            <img src="{{ residuals_plot_url }}" alt="Residuals Plot">
+        </div>
         {% endif %}
 
         {% if error %}
         <p class="error">{{ error }}</p>
+        <script>
+            alert("{{ error }}");
+        </script>
         {% endif %}
     </div>
+
+    <script>
+        // Menambahkan validasi sebelum submit form jika ada error
+        const form = document.getElementById("regresiForm");
+        form.onsubmit = function (event) {
+            const xValues = document.getElementById("x_values").value.split(',');
+            const yValues = document.getElementById("y_values").value.split(',');
+
+            if (xValues.length !== yValues.length) {
+                event.preventDefault();  // Mencegah form dikirim
+                alert("Jumlah nilai x dan y harus sama!");
+            }
+        };
+    </script>
 </body>
+
 </html>
