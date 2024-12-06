@@ -18,12 +18,12 @@ Aplikasi ini dibangun menggunakan Python, Flask, dan MySQL untuk mempermudah ana
 
 ## 📂 Struktur Proyek  
 ```
-📦 Regresi-Linier-Web-App
+TUGAS BESAR METODE NUMERIK
  ┣ 📂 project
  ┃ ┗ 📂 static           # Folder untuk menyimpan grafik hasil regresi
+ ┣ 📂 Python             # Folder untuk file Python utama (misalnya `main.py`)
  ┣ 📂 templates          # Folder untuk file HTML
  ┃ ┗ 📜 index.html       # Antarmuka web utama
- ┣ 📜 app.py             # File Python utama
  ┣ 📜 requirements.txt   # Daftar dependensi Python
 ```
 
@@ -35,13 +35,14 @@ Aplikasi ini dibangun menggunakan Python, Flask, dan MySQL untuk mempermudah ana
 git clone https://github.com/K3M3K/Regresi-Linier.git
 cd Regresi-Linier
 cd Pyhton
+python main.app
 ```
 
 ### 2. Buat Virtual Environment  
 ```bash
 python -m venv venv
 source venv/bin/activate  # Untuk Linux/Mac
-venv\Scripts\activate     # Untuk Windows
+.venv\Scripts\activate     # Untuk Windows
 ```
 
 ### 3. Instal Dependensi  
